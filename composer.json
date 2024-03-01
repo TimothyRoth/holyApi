@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=8.0.0",
-        "timothyroth/holyapi": "^1.0"
+        "timothyroth/holyapi": "dev-main"
     },
     "minimum-stability": "stable"
 }
