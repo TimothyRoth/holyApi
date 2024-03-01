@@ -15,6 +15,8 @@ class Table implements TableInterface
             'name' => _x($table_name, 'post type general name', ''),
         ];
 
+        $text_domain = PLUGIN_TEXT_DOMAIN ?? 'wp_theme';
+
         $default_args = [
             'label' => __($table_name, PLUGIN_TEXT_DOMAIN),
             'labels' => $labels,
