@@ -6,8 +6,16 @@ use HolyApi\Metabox\MetaboxInterface;
 
 class Metabox implements MetaboxInterface
 {
-    public function create(string $name, callable $callback, string|array $screen = null, string $context = 'advanced', string $priority = 'default', array $callback_args = null): void
+    public function create(string $name, callable $callback, string|array $screen = null, int|null $id = null, string $context = 'advanced', string $priority = 'default', array $callback_args = null): void
     {
+        if (is_int($id)) {
+            global $post;
+            if ($post->ID === (int)get_option('page_on_front')) {
+                add_meta_box($name, $name, $callback, $screen, $context, $priority, $callback_args);
+                return;
+            }
+        }
+
         add_action('add_meta_boxes', function () use ($name, $callback, $screen, $context, $priority, $callback_args) {
             add_meta_box($name, $name, $callback, $screen, $context, $priority, $callback_args);
         });
