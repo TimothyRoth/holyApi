@@ -4,7 +4,7 @@ namespace HolyApi\Term;
 
 interface TermInterface
 {
-    public function create(string $term_name, string $taxonomy_name, bool $auto_hook = false, array $args = []): mixed;
+    public function create(string $term_name, string $taxonomy_name, array $args = []): void;
 
     public function read(int $term_id, string $taxonomy_name, array $args = []): object|bool;
 

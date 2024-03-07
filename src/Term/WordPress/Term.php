@@ -6,18 +6,14 @@ use HolyApi\Term\TermInterface;
 
 class Term implements TermInterface
 {
-    public function create(string $term_name, string $taxonomy_name, bool $auto_hook = false, array $args = []): mixed
+    public function create(string $term_name, string $taxonomy_name, array $args = []): void
     {
-        if ($auto_hook) {
-            add_action('init', function () use ($term_name, $taxonomy_name, $args) {
-                $term_info = wp_insert_term($term_name, $taxonomy_name, $args);
-                is_wp_error($term_info) ? false : $term_info['term_id'];
-            });
-            return true;
-        }
 
-        $term_info = wp_insert_term($term_name, $taxonomy_name, $args);
-        return is_wp_error($term_info) ? false : $term_info['term_id'];
+        add_action('init', function () use ($term_name, $taxonomy_name, $args) {
+            $term_info = wp_insert_term($term_name, $taxonomy_name, $args);
+            is_wp_error($term_info) ? false : $term_info['term_id'];
+        });
+
     }
 
 

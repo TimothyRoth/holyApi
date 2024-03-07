@@ -6,20 +6,23 @@ use HolyApi\Taxonomy\TaxonomyInterface;
 
 class Taxonomy implements TaxonomyInterface
 {
-    public function create(string $taxonomy_name, string|array $table_name, bool $auto_hook = false, array $args = null): void
+    public function create(string $taxonomy_name, string|array $table_name, array $args = null): void
     {
+
+        $text_domain = PLUGIN_TEXT_DOMAIN ?? 'wp_theme';
+
         $labels = array(
-            'name' => _x($taxonomy_name, 'taxonomy general name', PLUGIN_TEXT_DOMAIN),
-            'singular_name' => _x($taxonomy_name, 'taxonomy singular name', PLUGIN_TEXT_DOMAIN),
-            'search_items' => __('Search in ' . $taxonomy_name, PLUGIN_TEXT_DOMAIN),
-            'all_items' => __('All ' . $taxonomy_name, PLUGIN_TEXT_DOMAIN),
-            'parent_item' => __('Superior ' . $taxonomy_name, PLUGIN_TEXT_DOMAIN),
-            'parent_item_colon' => __('Superior ' . $taxonomy_name . ':', PLUGIN_TEXT_DOMAIN),
-            'edit_item' => __('Edit ' . $taxonomy_name, PLUGIN_TEXT_DOMAIN),
-            'update_item' => __('Save' . $taxonomy_name, PLUGIN_TEXT_DOMAIN),
-            'add_new_item' => __('New ' . $taxonomy_name, PLUGIN_TEXT_DOMAIN),
-            'new_item_name' => __('Name of ' . $taxonomy_name, PLUGIN_TEXT_DOMAIN),
-            'menu_name' => __($taxonomy_name, PLUGIN_TEXT_DOMAIN),
+            'name' => _x($taxonomy_name, 'taxonomy general name',),
+            'singular_name' => _x($taxonomy_name, 'taxonomy singular name', $text_domain),
+            'search_items' => __('Search in ' . $taxonomy_name, $text_domain),
+            'all_items' => __('All ' . $taxonomy_name, $text_domain),
+            'parent_item' => __('Superior ' . $taxonomy_name, $text_domain),
+            'parent_item_colon' => __('Superior ' . $taxonomy_name . ':', $text_domain),
+            'edit_item' => __('Edit ' . $taxonomy_name, $text_domain),
+            'update_item' => __('Save' . $taxonomy_name, $text_domain),
+            'add_new_item' => __('New ' . $taxonomy_name, $text_domain),
+            'new_item_name' => __('Name of ' . $taxonomy_name, $text_domain),
+            'menu_name' => __($taxonomy_name, $text_domain),
         );
 
         $default_args = array(
@@ -32,10 +35,6 @@ class Taxonomy implements TaxonomyInterface
 
         if ($args) {
             $default_args = array_merge($default_args, $args);
-        }
-
-        if (!$auto_hook) {
-            register_taxonomy($taxonomy_name, lcfirst($table_name), $default_args);
         }
 
         add_action('init', function () use ($taxonomy_name, $table_name, $default_args, &$return_value) {
@@ -66,17 +65,11 @@ class Taxonomy implements TaxonomyInterface
     }
 
     public
-    function delete(string $taxonomy_name, bool $auto_hook = false): bool
+    function delete(string $taxonomy_name): bool
     {
-        if ($auto_hook) {
-            return add_action('init', function () use ($taxonomy_name) {
-                unregister_taxonomy($taxonomy_name);
-            });
-        }
-
-        if (taxonomy_exists($taxonomy_name)) {
-            return unregister_taxonomy($taxonomy_name);
-        }
-        return false;
+        return add_action('init', function () use ($taxonomy_name) {
+            unregister_taxonomy($taxonomy_name);
+        });
     }
+
 }
