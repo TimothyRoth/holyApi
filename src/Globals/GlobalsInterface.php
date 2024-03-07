@@ -12,6 +12,8 @@ interface GlobalsInterface
 
     public function getDB(): mixed;
 
+    public function getCustomizer(): mixed;
+
     public function getVersion(): string;
 
     public function getWP(): mixed;

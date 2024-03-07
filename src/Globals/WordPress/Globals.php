@@ -41,6 +41,12 @@ class Globals implements GlobalsInterface
         return $wp;
     }
 
+    public function getCustomizer(): WP_Customize_Manager
+    {
+        global $wp_customize;
+        return $wp_customize;
+    }
+
     public function getSiteName(): string
     {
         return get_bloginfo('name');
