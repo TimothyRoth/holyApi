@@ -39,6 +39,13 @@ class Metabox implements MetaboxInterface
         });
     }
 
+    public function addScripts(string $scripts): void
+    {
+        add_action('admin_footer', function () use ($scripts) {
+            echo $scripts;
+        });
+    }
+
     private function saveFields($fields): void
     {
         foreach ($fields as $field) {
