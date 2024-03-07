@@ -10,10 +10,12 @@ class Metabox implements MetaboxInterface
     {
         if (is_int($id)) {
             global $post;
-            if ($post->ID === (int)get_option('page_on_front')) {
-                add_meta_box($name, $name, $callback, $screen, $context, $priority, $callback_args);
-                return;
+            if ($post->ID === $id) {
+                add_action('add_meta_boxes', function () use ($name, $callback, $screen, $context, $priority, $callback_args) {
+                    add_meta_box($name, $name, $callback, $screen, $context, $priority, $callback_args);
+                });
             }
+            return;
         }
 
         add_action('add_meta_boxes', function () use ($name, $callback, $screen, $context, $priority, $callback_args) {
