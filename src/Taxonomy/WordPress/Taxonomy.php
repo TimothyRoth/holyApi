@@ -6,10 +6,8 @@ use HolyApi\Taxonomy\TaxonomyInterface;
 
 class Taxonomy implements TaxonomyInterface
 {
-    public function create(string $taxonomy_name, string|array $table_name, array $args = null): void
+    public function create(string $taxonomy_name, string|array $table_name, string $text_domain = 'wp_theme', array $args = null): void
     {
-
-        $text_domain = PLUGIN_TEXT_DOMAIN ?? 'wp_theme';
 
         $labels = array(
             'name' => _x($taxonomy_name, 'taxonomy general name',),

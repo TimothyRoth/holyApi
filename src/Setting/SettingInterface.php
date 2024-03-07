@@ -12,8 +12,6 @@ interface SettingInterface
 
     public function delete(string $setting_name): bool;
 
-    public function createMenuPage(string $page_title, string $menu_title, string $capability, string $menu_slug, callable $function, string $icon_url = 'dashicons-admin-generic', int $position = 6): void;
-
     public function updateSettings(array $fields): void;
 
 }

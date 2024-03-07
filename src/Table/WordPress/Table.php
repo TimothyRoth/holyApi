@@ -9,13 +9,11 @@ class Table implements TableInterface
 {
 
 
-    public function create(string $table_name, bool $show_in_menu = true, $public = false, $has_archive = false, string $menu_icon = "dashicons-admin-post", array $args = null): mixed
+    public function create(string $table_name, bool $show_in_menu = true, $public = false, $has_archive = false, string $text_domain = 'wp_theme', string $menu_icon = "dashicons-admin-post", array $args = null): mixed
     {
         $labels = [
             'name' => _x($table_name, 'post type general name', ''),
         ];
-
-        $text_domain = PLUGIN_TEXT_DOMAIN ?? 'wp_theme';
 
         $default_args = [
             'label' => __($table_name, $text_domain),

@@ -7,14 +7,14 @@ use HolyApi\Cron\CronInterface;
 class Cron implements CronInterface
 {
 
-    public function register(callable $event, string $schedule_name, int $interval = 2880, string $interval_name = PLUGIN_TEXT_DOMAIN . '_interval'): void
+    public function register(callable $event, string $schedule_name, int $interval = 2880, string $interval_name = 'wp_theme_interval', string $text_domain = 'wp_theme'): void
     {
 
-        add_filter('cron_schedules', function ($schedules) use ($interval_name, $interval): array {
+        add_filter('cron_schedules', function ($schedules) use ($interval_name, $interval, $text_domain): array {
 
             $schedules[$interval_name] = [
                 'interval' => $interval,
-                'display' => __($interval_name, PLUGIN_TEXT_DOMAIN)
+                'display' => __($interval_name, $text_domain)
             ];
 
             return $schedules;

@@ -5,7 +5,7 @@ namespace HolyApi\Taxonomy;
 interface TaxonomyInterface
 {
 
-    public function create(string $taxonomy_name, string|array $table_name): void;
+    public function create(string $taxonomy_name, string|array $table_name, string $text_domain = 'wp_theme', array $args = null): void;
 
     public function read(string $taxonomy_name): ?object;
 
