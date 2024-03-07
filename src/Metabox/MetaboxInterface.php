@@ -8,5 +8,7 @@ interface MetaboxInterface
 
     public function delete(string $id, string|array $screen, string $context = 'advanced');
 
+    public function addScripts(string $scripts): void;
+
     public function updateFields(array $fields): void;
 }
