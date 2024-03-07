@@ -19,4 +19,21 @@ interface RowInterface
 
     public function removeTerm(int $row_id, string $term_name, string $taxonomy_name): bool;
 
+    public function getPermalink(int|null $row_id = null): string;
+
+    public function getTitle(int|null $row_id = null): string;
+
+    public function getContent(int|null $row_id = null): string;
+
+    public function getExcerpt(int|null $row_id = null): string;
+
+    public function getAuthor(int|null $row_id = null): string;
+
+    public function getDate(int|null $row_id = null): string;
+
+    public function getTime(int|null $row_id = null): string;
+
+    public function getCategory(int|null $row_id = null): array;
+
+
 }

@@ -71,4 +71,44 @@ class Row implements RowInterface
         return wp_get_post_terms($row_id, $taxonomy_name, $args);
     }
 
+    public function getPermalink(int|null $row_id = null): string
+    {
+        return get_permalink($row_id);
+    }
+
+    public function getTitle(int|null $row_id = null): string
+    {
+        return get_the_title($row_id);
+    }
+
+    public function getContent(int|null $row_id = null): string
+    {
+        return get_the_content($row_id);
+    }
+
+    public function getExcerpt(int|null $row_id = null): string
+    {
+        return get_the_excerpt($row_id);
+    }
+
+    public function getAuthor(int|null $row_id = null): string
+    {
+        return get_the_author($row_id);
+    }
+
+    public function getDate(int|null $row_id = null): string
+    {
+        return get_the_date($row_id);
+    }
+
+    public function getTime(int|null $row_id = null): string
+    {
+        return get_the_time($row_id);
+    }
+
+    public function getCategory(int|null $row_id = null): array
+    {
+        return get_the_category($row_id);
+    }
+
 }
